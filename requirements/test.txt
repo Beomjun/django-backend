@@ -1,0 +1,5 @@
+-r base.txt
+
+factory_boy==3.2.0
+faker==8.1.0
+parameterized==0.8.1

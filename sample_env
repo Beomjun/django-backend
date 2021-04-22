@@ -1,0 +1,12 @@
+# General settings
+DJANGO_SETTINGS_MODULE=config.settings.local
+DJANGO_ADMIN_URL=custom_admin/
+DJANGO_SECRET_KEY=test_secret
+
+# PostgreSQL
+POSTGRES_DB=db
+POSTGRES_NAME=db
+POSTGRES_USER=db
+POSTGRES_PASSWORD=password
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432

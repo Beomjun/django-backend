@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+from django.apps import AppConfig
+
+
+class ApiConfig(AppConfig):
+    name = 'backend.api'

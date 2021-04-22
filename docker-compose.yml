@@ -1,0 +1,63 @@
+version: "3.5"
+
+services:
+  postgres:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./compose/postgres/Dockerfile-DEV
+    networks:
+      - shared_network
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_NAME=db
+      - POSTGRES_USER=db
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_PORT=5432
+
+  redis:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./compose/redis/Dockerfile-DEV
+    networks:
+      - shared_network
+    ports:
+      - "6379:6379"
+
+  backend:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./compose/backend/Dockerfile-DEV
+    command: /start-DEV.sh
+    depends_on:
+      - postgres
+      - redis
+    links:
+      - postgres
+      - redis
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_NAME=db
+      - POSTGRES_USER=db
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_PORT=5432
+    env_file:
+      - .env
+    volumes:
+      - .:/webapps/django
+    networks:
+      - shared_network
+    ports:
+      - "2222:22"
+      - "8000:8000"
+
+networks:
+  shared_network:
+    driver: bridge
+    name: shared_network
