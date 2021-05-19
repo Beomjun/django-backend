@@ -14,3 +14,13 @@ if settings.DEBUG:
         urlpatterns += [
             path('rosetta/', include('rosetta.urls')),
         ]
+
+    if 'debug_toolbar' in settings.INSTALLED_APPS:
+        try:
+            import debug_toolbar
+
+            urlpatterns += [
+                path('__debug__/', include(debug_toolbar.urls)),
+            ]
+        except ImportError:
+            pass
