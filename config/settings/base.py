@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from typing import List
+
 import environ
 from django.utils.translation import ugettext_lazy as _
 
@@ -17,7 +19,7 @@ SECRET_KEY = 'django-insecure-secret-key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: List[str] = []
 
 # Application definition
 DJANGO_APPS = [
