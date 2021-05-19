@@ -6,6 +6,7 @@ from inspect import getmembers, isclass
 from graphene import ObjectType
 
 
+# Reference: https://github.com/graphql-python/graphene/issues/545#issuecomment-329630141
 class QueriesAbstract(ObjectType):
     pass
 
