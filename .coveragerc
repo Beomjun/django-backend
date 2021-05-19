@@ -19,6 +19,7 @@ omit =
     backend/api/mutation.py
     backend/api/query.py
     backend/api/schema.py
+    backend/common/testcase.py
 
 [report]
 exclude_lines =
@@ -44,3 +45,4 @@ omit =
     backend/api/mutation.py
     backend/api/query.py
     backend/api/schema.py
+    backend/common/testcase.py
