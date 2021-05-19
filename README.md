@@ -5,7 +5,7 @@ This is a ready to go Django project template integrated with Django REST framew
 
 # Features
 
-- For Django 3.2
+- For Django 3.2 LTS
 - Works with Python 3.9
 - Integrated with Django REST framework and Graphene Django for supporting GraphQL
 - Comes with custom user model ready to go
