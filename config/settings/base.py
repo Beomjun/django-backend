@@ -35,6 +35,7 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'graphene_django',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 LOCAL_APPS = [
     'backend.api',
@@ -121,8 +122,18 @@ STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Django Rest Framework
+REST_FRAMEWORK = {
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 # Custom
 ADMIN_URL = env('DJANGO_ADMIN_URL', default='custom_admin/')
