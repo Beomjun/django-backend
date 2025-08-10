@@ -1,0 +1,85 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ '3.13.6' ]
+
+    services:
+      postgres:
+        image: postgres:17.5-alpine
+        env:
+          POSTGRES_NAME: db
+          POSTGRES_USER: db
+          POSTGRES_HOST: postgres
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:8.2.0-alpine
+        options: --entrypoint redis-server
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Linting (flake8)
+        uses: py-actions/flake8@v2
+      - name: Linting (black)
+        uses: psf/black@stable
+        with:
+          version: "24.3.0"
+          options: "--check"
+          src: "."
+      # - name: Linting (isort)
+      #   uses: isort/isort-action@master
+      #   with:
+      #     configuration: '--check-only --diff --settings-file=./pyproject.toml'
+      - name: Install Dependencies
+        run: |
+          python3 -m venv venv
+          . venv/bin/activate
+          pip install --upgrade pip
+          pip install pipenv
+          pipenv install --python ${{ matrix.python-version }}
+          pipenv install --dev
+      - name: Run Tests
+        env:
+          POSTGRES_HOST: 127.0.0.1
+          POSTGRES_PORT: 5432
+          POSTGRES_NAME: db
+          POSTGRES_USER: db
+          POSTGRES_PASSWORD: password
+          REDIS_URL: redis://localhost:6379
+          DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+        run: |
+          . venv/bin/activate
+          coverage run manage.py test --noinput --settings=config.settings.test
+
+          MIN_COVERAGE=90
+          COVERAGE_RESULT=`coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g'`
+          if [[ $COVERAGE_RESULT -gt $MIN_COVERAGE ]]; then
+              echo "Good Job! coverage above threshold. Coverage: $COVERAGE_RESULT"
+          else
+              echo "#################################################"
+              echo "Code coverage below allowed threshold ($COVERAGE_RESULT<$MIN_COVERAGE)"
+              exit 1
+          fi
+
+          coverage xml
+          curl https://deepsource.io/cli | sh
+          DEEPSOURCE_DSN=$DEEPSOURCE_DSN ./bin/deepsource report --analyzer test-coverage --key python --value-file ./coverage.xml
