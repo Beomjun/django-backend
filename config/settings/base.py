@@ -2,7 +2,7 @@
 from typing import List
 
 import environ
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 ROOT_DIR = environ.Path(__file__) - 3  # (root/config/settings/base.py - 3 = root/)
 APPS_DIR = ROOT_DIR.path('backend')
