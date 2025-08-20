@@ -2,10 +2,10 @@
 from config.settings.base import *  # noqa pylint: disable=wildcard-import, unused-wildcard-import
 
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": env("POSTGRES_NAME", default="db"),
         "USER": env("POSTGRES_USER", default="db"),
         "PASSWORD": env("POSTGRES_PASSWORD", default="password"),

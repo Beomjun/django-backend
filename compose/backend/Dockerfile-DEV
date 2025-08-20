@@ -4,22 +4,20 @@ LABEL maintainer="Beomjun Kang <kals323@gmail.com>"
 
 ENV PYTHONUNBUFFERED 1
 
-# Requirements have to be pulled and installed here, otherwise caching won't work
-COPY ./requirements /requirements
-COPY ./compose/backend/entrypoint-DEV.sh /entrypoint.sh
-COPY ./compose/backend/start-DEV.sh /start-DEV.sh
+WORKDIR /webapps/django
+
+COPY Pipfile* ./
+COPY ./compose/backend/start-DEV.sh /start.sh
 
 RUN apt-get update --no-install-recommends && \
     apt-get install -y -qq vim gettext && \
     rm -rf /var/lib/apt/lists/* && \
     pip install --upgrade pip && \
-    pip install -r /requirements/local.txt && \
-    pip install -r /requirements/production.txt && \
-    sed -i 's/\r//' /entrypoint.sh && \
-    chmod +x /entrypoint.sh && \
-    sed -i 's/\r//' /start-DEV.sh && \
-    chmod +x /start-DEV.sh
+    pip install pipenv && \
+    pipenv install --system --dev --ignore-pipfile && \
+    sed -i 's/\r//' /start.sh && \
+    chmod +x /start.sh
 
-WORKDIR /webapps/django
+COPY . .
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/start.sh"]
