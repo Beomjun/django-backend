@@ -10,10 +10,10 @@ fake = Faker()
 class UserFactory(factory.django.DjangoModelFactory):
     is_active = True
     username = factory.LazyFunction(fake.slug)
-    password = factory.PostGenerationMethodCall('set_password', 'password')
-    email = factory.Faker('email')
-    first_name = factory.Faker('name')
-    last_name = factory.Faker('name')
+    password = factory.PostGenerationMethodCall("set_password", "password")
+    email = factory.Faker("email")
+    first_name = factory.Faker("name")
+    last_name = factory.Faker("name")
 
     class Meta:
         model = User

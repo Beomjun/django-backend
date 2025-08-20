@@ -14,5 +14,5 @@ class DRFAuthenticatedGraphQLView(GraphQLView):
     @classmethod
     def as_view(cls, *args, **kwargs):
         view = super(DRFAuthenticatedGraphQLView, cls).as_view(*args, **kwargs)
-        view = api_view(['GET', 'POST'])(view)
+        view = api_view(["GET", "POST"])(view)
         return view

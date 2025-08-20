@@ -8,7 +8,7 @@ from backend.common.models import UUIDModel
 
 
 class User(AbstractUser, UUIDModel):
-    last_accessed = models.DateTimeField(_('Last Accessed'), default=now)
+    last_accessed = models.DateTimeField(_("Last Accessed"), default=now)
 
     class Meta:
-        verbose_name_plural = 'Users'
+        verbose_name_plural = "Users"

@@ -6,4 +6,4 @@ from backend.user.models import User
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    readonly_fields = ('password', 'date_joined', 'last_accessed')
+    readonly_fields = ("password", "date_joined", "last_accessed")
