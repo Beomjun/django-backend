@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4712efe555719815fc91099ce379ab9b8f7fc44e73dee30455e19bca1b8eadee"
+            "sha256": "d4c7d9b8c2006d0903c298b77098523337d3e4da60efdc754c45cf911596d4be"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,20 +18,20 @@
     "default": {
         "asgiref": {
             "hashes": [
-                "sha256:a5ab6582236218e5ef1648f242fd9f10626cfd4de8dc377db215d5d5098e3142",
-                "sha256:f3bba7092a48005b5f5bacd747d36ee4a5a61f4a269a6df590b43144355ebd2c"
+                "sha256:5f184dc43b7e763efe848065441eac62229c9f7b0475f41f80e207a114eda4ce",
+                "sha256:e8667a091e69529631969fd45dc268fa79b99c92c5fcdda727757e52146ec133"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==3.9.1"
+            "version": "==3.11.1"
         },
         "django": {
             "hashes": [
-                "sha256:42fdeaba6e6449d88d4f66de47871015097dc6f1b87910db00a91946295cfae4",
-                "sha256:dafbfaf52c2f289bd65f4ab935791cb4fb9a198f2a5ba9faf35d7338a77e9803"
+                "sha256:49a23c1b83ef31525f8d71a57b040f91d34660edb3f086280a8519855655ed3c",
+                "sha256:a4b9cd881991add394cafa8bb3b11ad1742d1e1470ba99c3ef53dc540316ccfe"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==4.2.23"
+            "version": "==4.2.28"
         },
         "django-cors-headers": {
             "hashes": [
@@ -159,11 +159,11 @@
         },
         "sqlparse": {
             "hashes": [
-                "sha256:09f67787f56a0b16ecdbde1bfc7f5d9c3371ca683cfeaa8e6ff60b4807ec9272",
-                "sha256:cf2196ed3418f3ba5de6af7e82c694a9fbdbfecccdfc72e281548517081f16ca"
+                "sha256:12a08b3bf3eec877c519589833aed092e2444e68240a3577e8e26148acc7b1ba",
+                "sha256:e20d4a9b0b8585fdf63b10d30066c7c94c5d7a7ec47c889a2d83a3caa93ff28e"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==0.5.3"
+            "version": "==0.5.5"
         },
         "text-unidecode": {
             "hashes": [
